@@ -16,15 +16,18 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.pulsar.databinding.ActivityMainBinding
+import com.example.pulsar.ui.dashboard.DashboardViewModel
 import com.polar.sdk.api.PolarBleApi
 import com.polar.sdk.api.PolarBleApiDefaultImpl
 import com.polar.sdk.api.errors.PolarInvalidArgument
 
+lateinit var mainViewModel: MainViewModel
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -46,38 +49,14 @@ class MainActivity : AppCompatActivity() {
 
     private var deviceId: String? = null
 
-    private fun connectDevice(deviceID: String) {
-        api = PolarBleApiDefaultImpl.defaultImplementation(
-            applicationContext,
-            setOf(
-                PolarBleApi.PolarBleSdkFeature.FEATURE_POLAR_ONLINE_STREAMING,
-                PolarBleApi.PolarBleSdkFeature.FEATURE_BATTERY_INFO,
-                PolarBleApi.PolarBleSdkFeature.FEATURE_DEVICE_INFO
-            )
-        )
 
-        try {
-            api.connectToDevice(deviceID)
-        } catch (a: PolarInvalidArgument) {
-            Toast.makeText(this, "Device ID is invalid", Toast.LENGTH_SHORT).show()
-            a.printStackTrace()
-        }
-    }
 
-    private val sharedPreferencesListener =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            if (key == DEVICE_ID) {
-                val newDeviceId = sharedPreferences.getString(DEVICE_ID, null)
-                newDeviceId?.let {
-                    // Panggil connectToDevice dengan deviceId yang baru
-                    connectDevice(it)
-                }
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Thread.sleep(2000)
+
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         supportActionBar?.hide()
 
@@ -85,19 +64,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         checkBT()
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
-        deviceId = sharedPreferences.getString(DEVICE_ID, "") ?: throw Exception("ECGActivity couldn't be created, no deviceId given")
-
-        if (deviceId.isNullOrEmpty()) {
-            // Lakukan tindakan jika deviceId belum ada atau tidak valid
-            // Contoh: Tampilkan pesan kepada pengguna
-            Toast.makeText(this, "Device ID is invalid", Toast.LENGTH_SHORT).show()
-        } else {
-            // Panggil fungsi connectToDevice dengan deviceId yang sudah ada
-            connectDevice(deviceId!!)
-        }
 
         val navView: BottomNavigationView = binding.navView
 

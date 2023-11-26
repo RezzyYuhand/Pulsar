@@ -11,5 +11,10 @@ class DashboardViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
+    private val id = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val idDevice: LiveData<String> = id
+
 
 }

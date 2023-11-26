@@ -2,4 +2,16 @@
     <string name="app_name">Pulsar</string>
     <string name="title_home">Home</string>
     <string name="title_device">Device</string>
+    <string name="connected">Connected!</string>
+    <string name="title_card"></string>
+    <string name="title_cardb"></string>
+    <string name="title_cardc"></string
+        >
+    <string name="subtitle_card"></string>
+    <string name="subtitle_cardb"></string>
+    <string name="subtitle_cardc"></string>
+
+    <string name="desc_card"></string>
+    <string name="desc_cardb"></string>
+    <string name="desc_cardc"></string>
 </resources>
