@@ -10,4 +10,6 @@ class DashboardViewModel : ViewModel() {
         value = "Please Insert you device ID to continue"
     }
     val text: LiveData<String> = _text
+
+
 }
