@@ -77,7 +77,7 @@ class DashboardFragment : Fragment() {
                 val mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
                 mainViewModel.id.value = id
 
-                textdevice.text = id
+                textdevice.text = "Device ID :$id"
                 api = PolarBleApiDefaultImpl.defaultImplementation(
                     requireContext().applicationContext,
                     setOf(
@@ -108,14 +108,14 @@ class DashboardFragment : Fragment() {
                     override fun disInformationReceived(identifier: String, uuid: UUID, value: String) {
                         if (uuid == UUID.fromString("00002a28-0000-1000-8000-00805f9b34fb")) {
                             val msg = "Firmware: " + value.trim { it <= ' ' }
-                            Log.d("FRMWR", "Firmware: " + identifier + " " + value.trim { it <= ' ' })
+                            Log.d("FRMWR", identifier + " " + value.trim { it <= ' ' })
                             textViewFwVersion.append(msg.trimIndent())
                         }
                     }
 
                     override fun batteryLevelReceived(identifier: String, level: Int) {
                         Log.d("BTRY", "Battery level $identifier $level%")
-                        val batteryLevelText = "Battery level: $level%"
+                        val batteryLevelText = " $level%"
                         textViewBattery.append(batteryLevelText)
                     }
 

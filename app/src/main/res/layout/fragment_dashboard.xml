@@ -93,7 +93,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:elevation="8dp"
+        android:elevation="10dp"
         app:cardBackgroundColor="@color/secondary_color"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/text_dashboard"
