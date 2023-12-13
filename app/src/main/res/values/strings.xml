@@ -5,8 +5,7 @@
     <string name="connected">Connected!</string>
     <string name="title_card">Young Aged </string>
     <string name="title_cardb">Middle Aged</string>
-    <string name="title_cardc">Old aged</string
-        >
+    <string name="title_cardc">Old aged</string>
     <string name="subtitle_card">between 20-40 years old</string>
     <string name="subtitle_cardb">between 50-60 years old</string>
     <string name="subtitle_cardc">between 70-80 years old</string>
@@ -14,4 +13,8 @@
     <string name="desc_card">100-170 beats per minute (bpm), and 200 bpm with an average maximum heart rate, 100%.</string>
     <string name="desc_cardb">85-145 beats per minute (bpm), and 170 bpm with an average maximum heart rate, 100%</string>
     <string name="desc_cardc">75-128 beats per minute (bpm), and 150 bpm with an average maximum heart rate 100%.</string>
+
+    <string name="logindesc">Please input your Email and Password below</string>
+    <string name="registerdesca">or register if you don\'t have an account</string>
+    <string name="registerdescb">Please input the following requirement to create an Account</string>
 </resources>

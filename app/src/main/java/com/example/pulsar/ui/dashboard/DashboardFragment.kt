@@ -1,6 +1,7 @@
 package com.example.pulsar.ui.dashboard
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.pulsar.Login
 import com.example.pulsar.MainActivity
 import com.example.pulsar.MainViewModel
 import com.example.pulsar.databinding.FragmentDashboardBinding
@@ -24,6 +26,7 @@ import com.polar.sdk.api.errors.PolarInvalidArgument
 import com.polar.sdk.api.model.PolarDeviceInfo
 import com.polar.sdk.api.model.PolarHrData
 import java.util.UUID
+import kotlin.math.log
 
 class DashboardFragment : Fragment() {
 
@@ -59,6 +62,8 @@ class DashboardFragment : Fragment() {
         val textViewBattery: TextView = binding.deviceBatteryTv
         val textViewFwVersion: TextView = binding.firmwareTv
         val disconnect: Button = binding.btDisconnect
+        val logout: Button = binding.logoutbtn
+
         disconnect.setOnClickListener {
             val id = deviceidinput.text.toString().uppercase()
             if (id.isEmpty()){
@@ -66,6 +71,11 @@ class DashboardFragment : Fragment() {
             } else {
                 api.disconnectFromDevice(id)
             }
+        }
+
+        logout.setOnClickListener {
+            dashboardViewModel.logout()
+            startActivity(Intent(requireContext(), Login::class.java))
         }
 
         val connectbt: Button = binding.btConnect

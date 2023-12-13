@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Thread.sleep(2000)
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
